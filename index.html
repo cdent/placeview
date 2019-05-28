@@ -14,6 +14,21 @@ body {
 	font-family: sans-serif;
 }
 
+placement-graph {
+	display: block;
+}
+
+placement-graph legend,
+placement-graph label,
+placement-graph label span {
+	display: block;
+	margin: 0 0 0.5em;
+}
+
+placement-graph label span {
+	font-weight: bold;
+}
+
 placement-graph input {
 	width: 100%;
 }
@@ -23,8 +38,18 @@ placement-graph input {
 <body>
 	<h1>placement viz</h1>
 	<placement-graph width="960" height="480">
-		<input type="text"
-				value="https://gist.githubusercontent.com/cdent/d01fe797de38ec583e74367ccde130ef/raw/6da255b4785c5880961b2d9ab438587388b3a11d/allocation_candidates2.json">
+		<fieldset>
+			<legend>configuration</legend>
+			<label>
+				<span>URI:</span>
+				<input type="text" name="uri"
+						value="https://gist.githubusercontent.com/cdent/d01fe797de38ec583e74367ccde130ef/raw/6da255b4785c5880961b2d9ab438587388b3a11d/allocation_candidates2.json">
+			</label>
+			<label>
+				<span>Auth Token:</span>
+				<input type="text" name="auth">
+			</label>
+		</fieldset>
 	</placement-graph>
 
 	<script src="https://d3js.org/d3.v5.min.js" defer></script>

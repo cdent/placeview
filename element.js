@@ -5,7 +5,13 @@ class PlacementGraph extends HTMLElement {
 	}
 
 	update() {
-		d3.json(this.uri).
+		let headers = {};
+		let { auth } = this;
+		if(auth) {
+			headers["X-Auth-Token"] = auth;
+		}
+
+		d3.json(this.uri, { headers }).
 			then(({ provider_summaries }) => {
 				let data = transform(provider_summaries);
 				this.render(data);
@@ -24,7 +30,11 @@ class PlacementGraph extends HTMLElement {
 	}
 
 	get uri() {
-		return this.querySelector("input").value;
+		return this.querySelector("input[name=uri]").value;
+	}
+
+	get auth() {
+		return this.querySelector("input[name=auth]").value;
 	}
 }
 
