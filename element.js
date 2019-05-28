@@ -1,7 +1,11 @@
 class PlacementGraph extends HTMLElement {
 	connectedCallback() {
-		let uri = this.getAttribute("src");
-		d3.json(uri).
+		this.update();
+		this.addEventListener("change", this.update);
+	}
+
+	update() {
+		d3.json(this.uri).
 			then(({ provider_summaries }) => {
 				let data = transform(provider_summaries);
 				this.render(data);
@@ -9,9 +13,18 @@ class PlacementGraph extends HTMLElement {
 	}
 
 	render({ nodes, links }) {
+		let { _graph } = this;
+		if(_graph) {
+			_graph.remove();
+		}
+
 		let width = this.getAttribute("width");
 		let height = this.getAttribute("height");
-		renderGraph({ nodes, links }, this, width, height);
+		this._graph = renderGraph({ nodes, links }, this, width, height);
+	}
+
+	get uri() {
+		return this.querySelector("input").value;
 	}
 }
 

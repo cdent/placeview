@@ -6,15 +6,26 @@
 	<title>placement viz</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
+* {
+	box-sizing: border-box;
+}
+
 body {
 	font-family: sans-serif;
+}
+
+placement-graph input {
+	width: 100%;
 }
 	</style>
 </head>
 
 <body>
 	<h1>placement viz</h1>
-	<placement-graph src="https://gist.githubusercontent.com/cdent/d01fe797de38ec583e74367ccde130ef/raw/6da255b4785c5880961b2d9ab438587388b3a11d/allocation_candidates2.json" width="960" height="480"></placement-graph>
+	<placement-graph width="960" height="480">
+		<input type="text"
+				value="https://gist.githubusercontent.com/cdent/d01fe797de38ec583e74367ccde130ef/raw/6da255b4785c5880961b2d9ab438587388b3a11d/allocation_candidates2.json">
+	</placement-graph>
 
 	<script src="https://d3js.org/d3.v5.min.js" defer></script>
 	<script type="module" src="element.js"></script>
