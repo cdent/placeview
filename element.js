@@ -11,10 +11,15 @@ class PlacementGraph extends HTMLElement {
 			headers["X-Auth-Token"] = auth;
 		}
 
+		this.setAttribute("aria-busy", "true");
+		let reset = () => this.removeAttribute("aria-busy");
 		d3.json(this.uri, { headers }).
 			then(({ provider_summaries }) => {
+				reset();
 				let data = transform(provider_summaries);
 				this.render(data);
+			}, err => {
+				reset();
 			});
 	}
 
