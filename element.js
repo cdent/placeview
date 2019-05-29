@@ -1,3 +1,6 @@
+/* eslint-env browser */
+/* global d3 */
+
 class PlacementGraph extends HTMLElement {
 	connectedCallback() {
 		this.update();
@@ -17,11 +20,11 @@ class PlacementGraph extends HTMLElement {
 		this.setAttribute("aria-busy", "true");
 		let reset = () => this.removeAttribute("aria-busy");
 		d3.json(this.uri, { headers }).
-			then(({ provider_summaries }) => {
+			then(({ provider_summaries }) => { // eslint-disable-line camelcase
 				reset();
 				let data = transform(provider_summaries);
 				this.render(data);
-			}, err => {
+			}, err => { // eslint-disable-line handle-callback-err
 				reset();
 			});
 	}
@@ -171,7 +174,7 @@ function drag(simulation) {
 function transform(data) {
 	let nodes = [];
 	let links = [];
-	Object.entries(data).forEach(([id,
+	Object.entries(data).forEach(([id, // eslint-disable-next-line indent
 			{ parent_provider_uuid: parentID, traits, resources }]) => {
 		let node = { id, resources, traits };
 		if(parentID) {
