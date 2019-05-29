@@ -5,9 +5,12 @@ class PlacementGraph extends HTMLElement {
 	}
 
 	update() {
-		let headers = {};
+		let headers = {
+			Accept: "application/json"
+		};
 		let { auth } = this;
 		if(auth) {
+			headers["OpenStack-API-Version"] = "placement latest";
 			headers["X-Auth-Token"] = auth;
 		}
 
