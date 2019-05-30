@@ -32,11 +32,14 @@ export default class NodeDetails {
 <ul>
 	${nodes.map(({ id, traits, resources }) => html`
 		<li>
-			<strong>ID: ${id}</strong>
-			<div>Traits: ${traits.length ? traits.join(", ") : "N/A"}</div>
+			<strong>ID:</strong> ${id}
+			<div>
+				<strong>Traits:</strong>
+				${traits.length ? traits.join(", ") : "N/A"}
+			</div>
 			${Object.entries(resources).map(([type, { capacity, used }]) => html`
 				<div>
-					Resource: ${type}
+					<strong>Resource:</strong> ${type}
 					capacity=${capacity}
 					used=${used}
 				</div>

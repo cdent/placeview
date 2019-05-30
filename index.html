@@ -37,17 +37,23 @@ placement-graph section {
 
 placement-graph ul {
 	width: var(--details-width);
+	margin: var(--spacing) 0;
+	list-style-type: none;
 }
 
 placement-graph li {
+	margin-bottom: var(--spacing);
 	border: 2px solid #AAA;
 	padding: var(--spacing);
 }
 
+placement-graph li:first-child {
+	margin-bottom: calc(3 * var(--spacing));
+}
+
 placement-graph legend,
 placement-graph label,
-placement-graph label span,
-placement-graph li {
+placement-graph label span {
 	display: block;
 	margin: 0 0 var(--spacing);
 }
