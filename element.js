@@ -1,11 +1,20 @@
 /* eslint-env browser */
 /* global d3 */
 import renderGraph from "./graph.js";
+import NodeDetails from "./details.js";
 
 class PlacementGraph extends HTMLElement {
 	connectedCallback() {
+		this.viz = createElement("section", this);
+		this.details = createElement("aside", this);
+
 		this.update();
+		let details = new NodeDetails(this.details);
+
 		this.addEventListener("change", this.update);
+		this.addEventListener("graph:selection", ev => {
+			details.add(ev.detail);
+		});
 	}
 
 	update() {
@@ -38,7 +47,7 @@ class PlacementGraph extends HTMLElement {
 
 		let width = this.getAttribute("width");
 		let height = this.getAttribute("height");
-		this._graph = renderGraph({ nodes, links }, this, width, height);
+		this._graph = renderGraph({ nodes, links }, this.viz, width, height);
 	}
 
 	get uri() {
@@ -66,4 +75,10 @@ function transform(data) {
 		nodes.push(node);
 	});
 	return { nodes, links };
+}
+
+function createElement(tag, parent) {
+	let node = document.createElement(tag);
+	parent.appendChild(node);
+	return node;
 }

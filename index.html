@@ -15,16 +15,31 @@ body {
 }
 
 placement-graph {
-	display: block;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 placement-graph[aria-busy] {
 	opacity: 0.5;
 }
 
+placement-graph fieldset {
+	flex-basis: 100%;
+}
+
+placement-graph section {
+	flex-grow: 1;
+}
+
+placement-graph li {
+	border: 2px solid #AAA;
+	padding: 0.5em;
+}
+
 placement-graph legend,
 placement-graph label,
-placement-graph label span {
+placement-graph label span,
+placement-graph li {
 	display: block;
 	margin: 0 0 0.5em;
 }
@@ -35,6 +50,10 @@ placement-graph label span {
 
 placement-graph input {
 	width: 100%;
+}
+
+placement-graph circle {
+	cursor: pointer;
 }
 	</style>
 </head>

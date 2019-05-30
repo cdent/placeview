@@ -1,4 +1,5 @@
 /* global d3 */
+import { dispatchEvent } from "./util.js";
 
 let NODE_COLOR = d => d.root ? "blue" : "red";
 let RADIUS = 10; // TODO: make this dependent on the number of nodes?
@@ -50,46 +51,13 @@ export default function renderGraph({ nodes, links }, root, width, height) {
 			attr("cy", d => d.y);
 	});
 
-	let tip;
+	let el = svg.node();
+
 	node.on("click", d => {
-		if(tip) {
-			tip.remove();
-		}
-
-		tip = svg.append("g").
-			attr("transform", `translate(${d.x}, ${d.y})`);
-
-		let rect = tip.append("rect").
-			style("fill", "white").
-			style("stroke", "steelblue");
-
-		tip.append("text").
-			text("Id: " + d.id).
-			attr("dy", "1em").
-			attr("x", 5);
-
-		tip.append("text").
-			text("Traits: " + d.traits).
-			attr("dy", "2em").
-			attr("x", 5);
-
-		let delta = 3;
-		Object.entries(d.resources).forEach(([resourceClass, { capacity, used }]) => {
-			tip.append("text").
-				text(`Resource: ${resourceClass} capacity: ${capacity} used: ${used}`).
-				attr("dy", `${delta}em`).
-				attr("x", 5);
-			delta += 1;
-		});
-
-		let bbox = tip.node().getBBox();
-		rect.attr("width", bbox.width + 5).
-			attr("height", bbox.height + 5);
-
-		// TODO: when clicking on box, it ought to go away
+		dispatchEvent(el, "graph:selection", d, { bubbles: true });
 	});
 
-	return svg.node();
+	return el;
 }
 
 function drag(simulation) {
