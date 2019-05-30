@@ -45,8 +45,7 @@ export default class NodeDetails {
 			${Object.entries(resources).map(([type, { capacity, used }]) => html`
 				<div>
 					<strong>Resource:</strong> ${type}
-					capacity=${capacity}
-					used=${used}
+					at ${Math.round(used / capacity * 100)}% (${used} / ${capacity})
 				</div>
 			`)}
 		</li>
