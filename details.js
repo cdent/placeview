@@ -24,6 +24,11 @@ export default class NodeDetails {
 		this.render(nodes);
 	}
 
+	reset() {
+		this._nodes = [];
+		this.render(this._nodes);
+	}
+
 	async init() { // required for lazy loading
 		this._init = load(LIT);
 		let { html, render } = await this._init;

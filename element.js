@@ -5,15 +5,15 @@ import NodeDetails from "./details.js";
 
 class PlacementGraph extends HTMLElement {
 	connectedCallback() {
-		this.viz = createElement("section", this);
-		this.details = createElement("aside", this);
+		this._viz = createElement("section", this);
+		let details = createElement("aside", this);
 
 		this.update();
-		let details = new NodeDetails(this.details);
+		this._details = new NodeDetails(details);
 
 		this.addEventListener("change", this.update);
 		this.addEventListener("graph:selection", ev => {
-			details.add(ev.detail);
+			this._details.add(ev.detail);
 		});
 	}
 
@@ -43,11 +43,12 @@ class PlacementGraph extends HTMLElement {
 		let { _graph } = this;
 		if(_graph) {
 			_graph.remove();
+			this._details.reset();
 		}
 
 		let width = this.getAttribute("width");
 		let height = this.getAttribute("height");
-		this._graph = renderGraph({ nodes, links }, this.viz, width, height);
+		this._graph = renderGraph({ nodes, links }, this._viz, width, height);
 	}
 
 	get uri() {
