@@ -15,6 +15,9 @@ body {
 }
 
 placement-graph {
+	--spacing: 0.5em;
+	--details-width: 30em;
+
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -29,16 +32,16 @@ placement-graph fieldset {
 
 placement-graph section {
 	flex-grow: 1;
-	max-width: calc(100% - 30em); /* NB: corresponds to `ul` width below */
+	max-width: calc(100% - var(--details-width));
 }
 
 placement-graph ul {
-	width: 30em;
+	width: var(--details-width);
 }
 
 placement-graph li {
 	border: 2px solid #AAA;
-	padding: 0.5em;
+	padding: var(--spacing);
 }
 
 placement-graph legend,
@@ -46,7 +49,7 @@ placement-graph label,
 placement-graph label span,
 placement-graph li {
 	display: block;
-	margin: 0 0 0.5em;
+	margin: 0 0 var(--spacing);
 }
 
 placement-graph label span {
