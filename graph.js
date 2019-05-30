@@ -8,9 +8,7 @@ let COLLIDE = 20;
 
 export default function renderGraph({ nodes, links }, root, width, height) {
 	let svg = d3.select(root).append("svg").
-		attr("viewBox", `0, 0, ${width}, ${height}`).
-		attr("width", width).
-		attr("height", height);
+		attr("viewBox", `0, 0, ${width}, ${height}`);
 
 	let simulation = d3.forceSimulation(nodes).
 		force("link", d3.forceLink(links).id(d => d.id)).
